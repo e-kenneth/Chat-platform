@@ -46,4 +46,16 @@ B. Database setup (mongoDB)
                 }
             }
     6. then go to entry file(index.js) and import and call the function connectDB();
-    7. 
+
+C. Signup, Login, Logout
+
+    a. Signup:
+        1. request fullname, password and email from client and check if they are empty or not. 
+        2. Hash password and generate a jwt token if all fields are according to requirements
+    b. Login:
+        1. Request email and password from client
+        2. match email with existing records in mongodb
+        3. compare password using bcrypt.compare(password, user.password)
+        4. Generate another jwt token with user.id and the response
+    c. Logout:
+        1. Simply clear the cookies 
