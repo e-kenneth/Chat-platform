@@ -1,5 +1,8 @@
 This is just to track what I have learned while following this tutorial on MERN stack realtime chat app 
 
+<!-- Error codes: -->
+ res.status(500).json({error:"Internal server error"});
+ 
 A. backend setup
     1. npm init -y to initialize the project
     2. install dependencies :
@@ -47,7 +50,7 @@ B. Database setup (mongoDB)
             }
     6. then go to entry file(index.js) and import and call the function connectDB();
 
-C. Signup, Login, Logout
+C. Signup, Login, Logout, checkAuth
 
     a. Signup:
         1. request fullname, password and email from client and check if they are empty or not. 
@@ -59,3 +62,19 @@ C. Signup, Login, Logout
         4. Generate another jwt token with user.id and the response
     c. Logout:
         1. Simply clear the cookies 
+
+    d. Checkauth:
+        1. check if the user has cookies. 
+
+D. Update profile:
+    1. Get user profilepic, if null print req
+    2. 
+        const uploadResponse = await cloudinary.uploader.upload(profilePic)
+        const updatedUser = await User.findByIdAndUpdate(userId, {profilePic:uploadResponse.secure_url}, {new:true}) 
+
+        res.status(200).json(updatedUser)
+
+E. Message routes:
+    1. Create message js model
+    2. Create the Schema for the message model
+    3. 
