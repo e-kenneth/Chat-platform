@@ -2,7 +2,7 @@ This is just to track what I have learned while following this tutorial on MERN 
 
 <!-- Error codes: -->
  res.status(500).json({error:"Internal server error"});
- 
+ <!-- BACKEND -->
 A. backend setup
     1. npm init -y to initialize the project
     2. install dependencies :
@@ -77,4 +77,21 @@ D. Update profile:
 E. Message routes:
     1. Create message js model
     2. Create the Schema for the message model
-    3. 
+    3. Get Message:
+        1. Find all messages who have the senderId = logged in user and receiverId = target and vice versa
+    4. Send Message:
+        as of 1:24:39, still only discussed how to handle sending images in message thru cloudinary, and initializing an object Message. 
+
+
+<!-- FRONTEND -->
+A. Frontend setup
+    1, DaisyUI
+    2. using axios, and zustand for global state management: 
+        import {create} from "zustand"
+
+        export const useAuthStore = create((set) => ({
+            authUser:null,
+
+            isCheckingAuth:true,
+        }));
+    
