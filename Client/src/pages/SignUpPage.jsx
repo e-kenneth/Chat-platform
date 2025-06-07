@@ -3,6 +3,9 @@ import { useAuthStore } from "../store/useAuthStore";
 import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare, User } from "lucide-react";
 import { Link } from "react-router-dom";
 
+import AuthImagePattern from "../components/AuthImagePattern";
+import toast from "react-hot-toast";
+
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -13,10 +16,23 @@ const SignUpPage = () => {
 
   const { signup, isSigningUp } = useAuthStore();
 
-  const validateForm = () => { }
+  const validateForm = () => {
+    if (!formData.fullName.trim()) return toast.error("Full name is required");
+    if (!formData.email.trim()) return toast.error("Email is required");
+    if (!/\S+@\S+\.\S+/.test(formData.email)) return toast.error("Invalid email format");
+    if (!formData.password) return toast.error("Password is required");
+    if (formData.password.length < 6) return toast.error("Password must be at least 6 characters");
+
+    return true;
+  };
+
   const handleSubmit = (e) => {
-    e.preventDefault()
-  }
+    e.preventDefault();
+
+    const success = validateForm();
+
+    if (success === true) signup(formData);
+  };
 
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
@@ -36,7 +52,6 @@ const SignUpPage = () => {
               <p className="text-base-content/60">Get started with your free account</p>
             </div>
           </div>
-
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="form-control">
@@ -115,6 +130,7 @@ const SignUpPage = () => {
               )}
             </button>
           </form>
+
           <div className="text-center">
             <p className="text-base-content/60">
               Already have an account?{" "}
@@ -123,10 +139,16 @@ const SignUpPage = () => {
               </Link>
             </p>
           </div>
-
         </div>
       </div>
+
+      {/* right side */}
+
+      <AuthImagePattern
+        title="Join our community"
+        subtitle="Connect with friends, share moments, and stay in touch with your loved ones."
+      />
     </div>
-  )
+  );
 };
 export default SignUpPage;

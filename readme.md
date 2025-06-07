@@ -94,4 +94,8 @@ A. Frontend setup
 
             isCheckingAuth:true,
         }));
+B. Creating Signup UI
+    1. Nothing really worth mentioning, just basic design stuff
+    2. One cool concept is how show password works with the use of state management. 
+C. 
     
